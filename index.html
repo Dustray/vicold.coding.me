@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name=”Keywords” Content="导航,网址导航,搜索,开发,简洁">
+    <meta name=”Description” Content="简洁、好看的网址导航">
+    <title>微寒导航</title>
+
+    <link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/all.css" rel="stylesheet" type="text/css">
+    <!-- <link href='css/navigation_black.css' rel='stylesheet' type='text/css'> -->
+    <link rel="icon" href="image/logo.png" sizes="32x32">
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="js/all.js"></script>
+    <script>
+        window.onload = showStyle();
+    </script>
+</head>
+<style>
+    .little-font {
+        font-size: xx-small;
+        -webkit-transform-origin-x: 0;
+        -webkit-transform: scale(0.90);
+        display: inline-block;
+    }
+
+    [v-cloak] {
+        display: none !important;
+    }
+</style>
+
+<body onkeydown="_keydown()" class="trans-all">
+    <div class="top-frame">
+        <p>可能会忘了吧</p>
+        <!-- <p>为何我<span class="little-font">(灵魂)</span>是我<span class="little-font">(肉体)</span>，而不是你<span class="little-font">(肉体)</span></p> -->
+    </div>
+    <div class="head trans-all">
+        <div class="title" style="overflow:hidden;">
+            <img draggable="false" src="https://image.dustray.cn/vicold/head_image.png" />
+            <p>v1.3.2</p>
+        </div>
+        <!-- <p>vicold.com</p> -->
+    </div>
+    <div class="contrainer" id="app">
+        <div class="main-content">
+            <div class="content-search trans-all">
+                <div class="search-text-frame">
+                    <input id="search-text" placeholder="请输入搜索内容" class=" search-text trans-all" type="text"
+                        autocomplete="off" onfocus="this.select()" oninput="onSearchChanged()"
+                        onBlur="onSearchUnFocus()" />
+                </div>
+
+                <div class="search-submit-frame trans-all ">
+                    <div>
+                        <input id="search-submit" class="search-submit  trans-all " type="button" title="Enter"
+                            onclick="submit(0)" value="百度" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+Z"
+                            onclick="submit(1)" value="必应" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+X"
+                            onclick="submit(2)" value="谷歌" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+C"
+                            onclick="submit(3)" value="GitHub" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+V"
+                            onclick="submit(4)" value="磁力" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+B"
+                            onclick="submit(5)" value="图片" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+N"
+                            onclick="submit(6)" value="词典" />
+                    </div>
+                    <div>
+                        <input id="search-submit" class="search-submit trans-all" type="button" title="Alt+M"
+                            onclick="submit(7)" value="翻译" />
+                    </div>
+                </div>
+            </div>
+            <div class="collapse multi-collapse content-search trans-all" id="SuggestCollapse">
+                <div class="search-text-frame suggestion card card-body">
+                    <div class="list-group">
+                        <button type="button" class="list-group-item list-group-item-action"
+                            onmouseout="onMouseOutSuggestion()" onmouseover="onMouseInSuggestion()"
+                            v-for="(key, i) in suggestionArray" :id="getTimeListId(i)" v-on:click="addToInput(key)"
+                            v-cloak>{{key}}</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs trans-all" id="tabs">
+                <ul class=" horizontal nav  nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link trans-all active" id="pills-home-tab" data-toggle="pill" href="#pills-1"
+                            role="tab" aria-controls="pills-1" aria-selected="true">综合</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-profile-tab" data-toggle="pill" href="#pills-2"
+                            role="tab" aria-controls="pills-2" aria-selected="false">娱乐</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-3"
+                            role="tab" aria-controls="pills-3" aria-selected="false">资讯</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-4"
+                            role="tab" aria-controls="pills-4" aria-selected="false">影音</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-5"
+                            role="tab" aria-controls="pills-5" aria-selected="false">工具</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-6"
+                            role="tab" aria-controls="pills-6" aria-selected="false">开发</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-7"
+                            role="tab" aria-controls="pills-7" aria-selected="false">资源</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link trans-all" id="pills-contact-tab" data-toggle="pill" href="#pills-8"
+                            role="tab" aria-controls="pills-8" aria-selected="false">教育</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-1" role="tabpanel" aria-labelledby="pills-1-tab">
+                    </div>
+                    <div class="tab-pane fade" id="pills-2" role="tabpanel" aria-labelledby="pills-2-tab"></div>
+                    <div class="tab-pane fade" id="pills-3" role="tabpanel" aria-labelledby="pills-3-tab"></div>
+                    <div class="tab-pane fade" id="pills-4" role="tabpanel" aria-labelledby="pills-4-tab"></div>
+                    <div class="tab-pane fade" id="pills-5" role="tabpanel" aria-labelledby="pills-5-tab"></div>
+                    <div class="tab-pane fade" id="pills-6" role="tabpanel" aria-labelledby="pills-6-tab"></div>
+                    <div class="tab-pane fade" id="pills-7" role="tabpanel" aria-labelledby="pills-7-tab"></div>
+                    <div class="tab-pane fade" id="pills-8" role="tabpanel" aria-labelledby="pills-8-tab"></div>
+                </div>
+            </div>
+            <!--End tabs-->
+
+            <div class="site-manage trans-all">
+                <p>站点工具</p>
+                <div class="tool-link trans-all">
+                    <div>
+                        <div class="tool-item-style-frame trans-all">
+                            <p>主题</p>
+                            <div class="tool-item-frame">
+                                <a href="javascript:void(0);" class="web-style-blue" onclick="changeStyle(0) ">
+                                    <div class=" style_blue trans-all"></div>冰寒蓝
+                                </a>
+                            </div>
+
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(1) ">
+                                    <div class="style_black trans-all"></div>炭晶黑
+                                </a>
+                            </div>
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(2) ">
+                                    <div class="style_red trans-all"></div>珐琅红
+                                </a>
+                            </div>
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(3) ">
+                                    <div class="style_green trans-all"></div>极光绿
+                                </a>
+                            </div>
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(4) ">
+                                    <div class="style_yellow trans-all"></div>柠檬黄
+                                </a>
+                            </div>
+                            <div class="tool-item-frame ">
+                                <a href="javascript:void(0);" class="web-style-black" onclick="changeStyle(99) ">
+                                    <div class="style_bing trans-all"></div>Bing
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="tool-item-link-frame trans-all">
+                            <p>网站工具</p>
+                            <div class="tool-item-frame">
+                                <a target="_blank"
+                                    href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cwTRKlURFJBSTAzV1FPSkM0VjM1RzVLOUdWNTdWNS4u">
+                                    <img class="trans-all" src="image/add.png" /> 推荐链接
+                                </a>
+                            </div>
+                            <div class="tool-item-frame">
+                                <a target="_blank"
+                                    href="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__cwTRKlUNjJJTk5HVlg3NThDTFlPRFhVU0NGMUFSUy4u">
+                                    <img class="trans-all" src="image/feedback.png" /> 反馈建议
+                                </a>
+                            </div>
+                            <div class="tool-item-frame">
+                                <a target="_blank" href="./about.html">
+                                    <img class="trans-all" src="image/about.png" /> 关于
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="foot-frame">
+        <div title="TrustAsia 安全签章" id="myssl_seal"
+            onclick="window.open('https://seal.trustasia.com/seal/detail?domain=vicold.com','TrustAsia 安全签章','height=800,width=470,top=0,right=0,toolbar=no,menubar=no,scrollbars=no,resizable=no,location=no,status=no')"
+            style="text-align: center"><img src="https://sealres.trustasia.com/seal/img/1x/seal.svg?domain=vicold.com"
+                alt="TrustAsia 安全签章" style="width: 130px;height: auto; cursor: pointer"></div>
+        <p>Copyright © 2019-2022 vicold.com
+            <script type="text/javascript"
+                src="https://s4.cnzz.com/z_stat.php?id=1278024757&web_id=1278024757"></script>
+        </p>
+    </div>
+</body>
+
+<script src="plugins/vue/vue.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.js"></script>
+<script src="data/urls.js"></script>
+<script>
+    function showLinkItem(link) {
+        for (var i = 0; i < link.length; i++) {
+            var elem = "<div class=\"item-frame trans-all\">" +
+                "<a href=\"" + link[i].address + "\"  target=\"_blank\">" +
+                "<img src=\" " + link[i].linkIcon + "\"  class=\"trans-all\"/><p>" +
+                link[i].linkName +
+                "</p></a> </div>";
+            $("#pills-" + link[i].linkType).append(elem);
+        }
+    }
+
+    window.onload = function () {
+        var searchs = document.getElementById('search-text');
+        searchs.focus();
+
+        showLinkItem(urls);
+    }
+
+    function submit(type) {
+        var text = document.getElementById('search-text').value;
+        if (text == "") return; //为空不响应
+        // if (text.focus()==false) return; //不聚焦不响应
+        $("#search-text").select();
+        text = strReplace(text);
+        switch (type) {
+            case 0:
+                window.open("https://baidu.com/s?word=" + text);
+                break;
+            case 1:
+                window.open("https://cn.bing.com/search?q=" + text);
+                break;
+            case 2:
+                window.open("https://www.google.com/search?q=" + text);
+                break;
+            case 3:
+                window.open("https://github.com/search?q=" + text);
+                break;
+            case 4:
+                window.open("https://skrbt15.icu/search?keyword=" + text);
+                break;
+            case 5:
+                window.open("https://image.baidu.com/search/index?tn=baiduimage&word=" + text);
+                break;
+            case 6:
+                window.open("https://cn.bing.com/dict/search?q=" + text);
+                break;
+            case 7:
+                window.open("https://fanyi.baidu.com/?aldtype=85#zh/en/" + text);
+                break;
+        }
+
+    }
+    var secondKeyPressed = false;
+
+    function _keydown() {
+        var searchs = document.getElementById('search-text');
+        if (searchs == document.activeElement) {
+            if (event.keyCode == 13) {
+                submit(0);
+            } else if (event.altKey) {
+                switch (event.keyCode) {
+                    case 90:
+                        submit(1);
+                        break; //z
+                    case 88:
+                        submit(2);
+                        break; //x
+                    case 67:
+                        submit(3);
+                        break; //c
+                    case 86:
+                        submit(4);
+                        break; //v
+                    case 66:
+                        submit(5);
+                        break; //b
+                    case 78:
+                        submit(6);
+                        break; //n
+                    case 77:
+                        submit(7);
+                        break; //m
+                    case 191:
+                        searchs.value = "";
+                        break; //？
+                }
+            } else if (event.keyCode == 38) { //上键
+                vm.preSuggest();
+            } else if (event.keyCode == 40) { //下键
+                vm.nextSuggest();
+            }
+        } else {
+            if (event.keyCode == 13) {
+                searchs.focus();
+            } else if (event.altKey) {
+                //var type = 0;
+                switch (event.keyCode) {
+                    case 191:
+                        searchs.focus();
+                        searchs.value = "";
+                        HiddenSuggestion(true);
+                        break; //？
+                }
+            }
+        }
+    }
+
+    function onSearchChanged() {
+        var text = document.getElementById('search-text').value;
+        if (text == "") {
+            HiddenSuggestion(true);
+            return; //为空不响应
+        }
+        searchSuggestion(text);
+    }
+    var ismouseInSuggestion = false;
+
+    function onSearchUnFocus() {
+        if (!ismouseInSuggestion) {
+            HiddenSuggestion(true);
+        }
+    }
+
+    function onMouseInSuggestion() {
+        ismouseInSuggestion = true;
+    }
+
+    function onMouseOutSuggestion() {
+        ismouseInSuggestion = false;
+    }
+</script>
+
+
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            suggestionArray: [],
+            lastActiveIndex: -1,
+            thisActiveIndex: -1,
+        },
+        mounted() { //启动时
+        },
+        methods: {
+            addToInput(key) {
+                document.getElementById('search-text').value = key;
+                HiddenSuggestion(true);
+                submit(0);
+            },
+            preSuggest() {
+                var lastI = this.lastActiveIndex;
+                var thisI = this.thisActiveIndex;
+                this.lastActiveIndex = thisI;
+                if (thisI == -1 || thisI == 0) {
+                    this.thisActiveIndex = this.suggestionArray.length - 1;
+                } else {
+                    this.thisActiveIndex--;
+                }
+                $("#suggestBtn-" + this.lastActiveIndex).removeClass("active");
+                $("#suggestBtn-" + this.thisActiveIndex).addClass("active");
+                document.getElementById('search-text').value = this.suggestionArray[this.thisActiveIndex];
+            },
+            nextSuggest() {
+                var lastI = this.lastActiveIndex;
+                var thisI = this.thisActiveIndex;
+                this.lastActiveIndex = thisI;
+                if (thisI == -1 || thisI == this.suggestionArray.length - 1) {
+                    this.thisActiveIndex = 0;
+                } else {
+                    this.thisActiveIndex++;
+                }
+                $("#suggestBtn-" + this.lastActiveIndex).removeClass("active");
+                $("#suggestBtn-" + this.thisActiveIndex).addClass("active");
+                document.getElementById('search-text').value = this.suggestionArray[this.thisActiveIndex];
+            },
+            getTimeListId(i) {
+                return "suggestBtn-" + i;
+            }
+        },
+        watch: {
+
+        }
+    });
+</script>
+<script type="text/javascript">
+    function searchSuggestion(key) {
+        //组装查询地址
+        var sugurl = "https://suggestion.baidu.com/su?wd=#content#&cb=window.baidu.sug";
+        var content = strReplace(key);
+        sugurl = sugurl.replace("#content#", content);
+        //定义回调函数
+        window.baidu = {
+            sug: function (json) {
+                console.log(json)
+                if (json.s.length == 0) {
+                    HiddenSuggestion(true);
+                } else {
+                    vm.suggestionArray = json.s;
+                    HiddenSuggestion(false);
+                }
+            }
+        }
+
+        //动态添加JS脚本
+        var script = document.createElement("script");
+        script.src = sugurl;
+        document.getElementsByTagName("head")[0].appendChild(script);
+
+    }
+
+    function HiddenSuggestion(isHidden) {
+        if (isHidden) { //隐藏
+            $('#SuggestCollapse').collapse('hide');
+            vm.suggestionArray = [];
+            vm.lastActiveIndex = -1;
+            vm.thisActiveIndex = -1;
+        } else {
+            $('#SuggestCollapse').collapse('show');
+        }
+    }
+
+    function strReplace(text) {
+        text = text.replace(/%/g, "%25");
+        text = text.replace(/#/g, "%23");
+        text = text.replace(/\$/g, "%24");
+        text = text.replace(/&/g, "%26");
+        text = text.replace(/\+/g, "%2B");
+        text = text.replace(/@/g, "%40");
+        return text;
+    }
+</script>
+
+</html>

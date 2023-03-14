@@ -1,0 +1,11 @@
+.upgrade-grade,
+.upgrade-log{
+    background: rgba(200,200,200,0.4);
+    padding:10px;
+    margin-bottom: 5px;
+}
+.log{
+    overflow: hidden;
+}
+.upgrade-log{
+}

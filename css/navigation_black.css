@@ -1,0 +1,461 @@
+/* 整个滚动条 */
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+body {
+    background-color: #2f2f2f;
+}
+
+input::-webkit-input-placeholder {
+    color: #bbb;
+}
+
+.trans-all {
+    /* 标准的语法 */
+    transition: all .5s;
+    /* Firefox 4 */
+    -moz-transition: all .5s;
+    /* Safari 和 Chrome */
+    -webkit-transition: all .5s;
+    /* Opera */
+    -o-transition: all .5s;
+}
+
+/*-----------------------------------通用结束-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+
+
+
+
+/*-----------------------------------HeadCSS-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+
+.head>.title>p {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/*-----------------------------------------------------------------------------*/
+
+/*----------------------------------Head End-----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+/*----------------------------------SearchCSS----------------------------------*/
+
+/*-----------------------------------------------------------------------------*/
+
+.content-search{
+    font-size: 15px;
+    width: 100%;
+}
+.content-search>.search-text-frame {
+    margin: 0 auto;
+}
+
+.content-search>.search-submit-frame {
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.content-search .search-text {
+    height: 40px;
+    width: 100%;
+    background-color: rgba(200, 200, 200, 0.3);
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px auto;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    border: 0 solid;
+    border-radius: 50px;
+    outline: none;
+}
+
+.content-search .search-text:focus {
+    box-shadow: 0 0 10px rgba(254, 254, 254, 0.7);;
+}
+
+.content-search>.search-submit-frame>div {
+    float: left;
+    width: 25%;
+    height: 55px;
+    text-align: center;
+}
+
+.content-search .search-submit {
+    background-color: rgba(200, 200, 200, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    border: 0 solid;
+    border-radius: 50px;
+    margin: 5px 0;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 12px;
+    overflow: hidden;
+    outline: none;
+    padding: 0;
+}
+
+.content-search .search-submit:hover {
+    background-color: rgba(200, 200, 200, 0.3);
+    box-shadow: 0 0 5px rgba(254, 254, 254, 0.7);;
+    cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .content-search>.search-text-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 25%;
+    }
+    .content-search .search-submit {}
+}
+
+@media (min-width: 480px) {
+    .content-search>.search-text-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame {
+        width: 100%;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 12.5%;
+    }
+    .content-search .search-submit {}
+}
+
+@media (min-width: 768px) {
+    .content-search>.search-text-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 12.5%;
+    }
+    .content-search .search-submit {}
+    .head {
+        margin: 50px;
+    }
+}
+
+@media (min-width: 980px) {
+    .content-search>.search-text-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame {
+        width: 600px;
+    }
+    .content-search>.search-submit-frame>div {
+        width: 12.5%;
+    }
+    .content-search .search-submit {}
+    .head {
+        margin: 60px;
+    }
+}
+
+
+
+
+/*--------------------------------------------------------------------------*/
+
+/*-------------------------------Search End---------------------------------*/
+
+/*--------------------------------------------------------------------------*/
+
+
+/* +++++++++++++++++++++++++++++++搜索建议+++++++++++++++++++++++++++++++ */
+
+
+.suggestion{
+    padding: 0px ;
+    margin: 5px auto !important;
+    background-color:rgba(200, 200, 200, 0.3); 
+    border-radius:20px ;
+    overflow: hidden;
+}
+
+.list-group-item{
+    color: rgba(255, 255, 255, 0.9);
+
+}
+
+/* -------------------------------搜索建议------------------------------- */
+
+
+
+/*--------------------------------------------------------------------------*/
+
+/*----------------------------------TabCSS----------------------------------*/
+
+/*--------------------------------------------------------------------------*/
+
+.tabs {
+    border-radius: 20px;
+    background-color: rgba(200, 200, 200, 0.3);
+    margin-top: 15px;
+}
+
+
+.tabs .horizontal li a{
+    border-radius: 20px;
+    background-color: #0000;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tabs .horizontal li a:hover {
+    background-color: rgba(200, 200, 200, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.tabs .horizontal li .active {
+    background-color: rgba(226, 219, 190, 1);
+    color: #555;
+}
+
+/*------------item------------*/
+
+.item-frame {
+    width: 10%;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 5px;
+}
+
+.item-frame>a {
+    padding: 5px 5px 10px 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+}
+
+.item-frame:hover img {
+    box-shadow: 0 0 5px rgba(254, 254, 254, 0.7);;
+}
+
+.item-frame>a>img {
+    width: 22px;
+    height: 22px;
+    background-color: rgba(200, 200, 200, 0.3);
+    padding: 10px;
+    border: 0 solid;
+    border-radius: 50px;
+    vertical-align: text-bottom;
+    margin-right: 2px;
+    margin: 0;
+}
+
+.item-frame>a>p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+    margin: 0;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    /*手机屏幕，图标和文字上下排列*/
+    .item-frame {
+        width: 25%;
+    }
+}
+
+@media (min-width: 480px) {
+    .item-frame {
+        width: 25%;
+    }
+}
+
+@media (min-width: 570px) {
+    .item-frame {
+        width: 20%;
+    }
+}
+
+@media (min-width: 768px) {
+    .item-frame {
+        width: 20%;
+    }
+    .item-frame>a {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 980px) {
+    .item-frame {
+        width: 16.66666666%;
+    }
+    .item-frame>a {
+        font-size: 13px;
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------------Tab End----------------------------------*/
+
+/*---------------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------------*/
+
+/*----------------------------------ManageCSS----------------------------------*/
+
+/*--------------------------------------------------------------------------*/
+
+.site-manage {
+    width: 100%;
+    background-color: rgba(200, 200, 200, 0.3);
+    border: 0 solid;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.site-manage>p {
+    height: 35px;
+    line-height: 35px;
+    font-size: 15px;
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    padding: 0;
+    margin: 0;
+}
+
+.site-manage>.tool-link {
+    width: 100%;
+    padding: 0 10px 10px 10px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    overflow: hidden;
+}
+
+.site-manage>.tool-link>div {
+    width: 50%;
+    float: left;
+}
+
+.tool-item-style-frame, .tool-item-link-frame {
+    text-align: center;
+    overflow: hidden;
+    background: rgba(200, 200, 200, 0.3);
+    border-radius: 20px;
+    width: auto;
+}
+
+.tool-item-style-frame {
+    margin-right: 5px;
+}
+
+.tool-item-link-frame {
+    margin-left: 5px;
+}
+
+.tool-item-style-frame>p, .tool-item-link-frame>p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 5px 0 0 0;
+}
+
+
+
+
+.tool-item-frame {
+    width: 70px;
+    float: left;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 5px;
+}
+
+.tool-item-frame>a {
+    padding: 5px 5px 10px 5px;
+    text-decoration: none;
+    display: block;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    overflow: hidden;
+    text-align: center;
+    height: 50px;
+}
+
+.tool-item-frame:hover img, .tool-item-frame:hover div {
+    box-shadow: 0 0 5px rgba(254, 254, 254, 0.7);;
+}
+
+.tool-item-frame>a>img {
+    width: 26px;
+    height: 26px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.tool-item-frame>a>p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline;
+    margin: 0;
+    display: block;
+}
+
+.tool-item-style-frame>.tool-item-frame>a>div {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #000;
+    border-radius: 50px;
+    vertical-align: text-bottom;
+    margin: 0 auto;
+}
+
+
+
+@media (max-width: 500px) {
+    .site-manage>.tool-link>div {
+        width: 100%;
+    }
+    .tool-item-style-frame {
+        margin-right: 0;
+    }
+    .tool-item-link-frame {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 380px) {}
+
+@media (min-width: 480px) {}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 980px) {}
+
+/*---------------------------------------------------------------------------*/
+
+/*----------------------------------Manage End----------------------------------*/
+
+/*---------------------------------------------------------------------------*/
